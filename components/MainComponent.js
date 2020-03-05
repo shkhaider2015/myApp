@@ -18,8 +18,9 @@ class Main extends Component
     onDishSelect(dishId)
     {
         this.setState( { SelectedDish : dishId } )
-    }
 
+    }
+//sakdsaldj
     render()
     {
         return(
