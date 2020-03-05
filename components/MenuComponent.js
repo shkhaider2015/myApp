@@ -10,9 +10,10 @@ function Menu(props)
             <ListItem
                 key = { index }
                 title = { item.name }
-                subtitle = { ityem.description }
+                subtitle = { item.description }
                 hideChevron = { true }
-                leftAvatar = { { source : require('./images/uthapizza.png') } }
+                onPress = { ()=> props.onPress(item.id) }
+                leftAvatar = { { source : require('./images/uthappizza.png') } }
             />
         )
     }
