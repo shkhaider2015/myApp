@@ -2,35 +2,40 @@ import React, { Component } from 'react';
 import Menu from './MenuComponent';
 import { DISHES } from '../shared/dishes';
 import DishDetail from './DishDetailComponent';
-import { View } from 'react-native';
+import { View, Platform } from 'react-native';
+import { createStackNavigator } from 'react-navigation';
+
+const MenuNavigator = createStackNavigator( { 
+    Menu : { screen : Menu },
+    DishDetail : { screen : DishDetail }
+ }, {
+     initialRoutName : 'Menu',
+     navigationOptions :
+      { 
+         headerStyle :
+        {
+             backgroundColor : '#512DA8'
+        },
+
+         headerTintColor : '#FFF',
+
+         headerTitleStyle :
+        {
+            color : '#FFF'
+        }
+      },
+      
+ } );
 
 class Main extends Component
 {
-    constructor(props)
-    {
-        super(props);
-        this.state = {
-            dishes : DISHES,
-            SelectedDish : null
-        };
-    }
 
-    onDishSelect(dishId)
-    {
-        this.setState( { SelectedDish : dishId } )
-
-    }
-//sakdsaldj
     render()
     {
         return(
-            <View>
+            <View style={ { flex : 1, paddingTop : Platform.OS === 'ios' ? 0: Expo.Constants.statusBarHeight } }>
 
-                <Menu dishes={ this.state.dishes } 
-                onPress = { (dishId) => this.onDishSelect(dishId) }
-                />
-                <DishDetail dish = { this.state.dishes.filter( (dish)=> dish.id === this.state.SelectedDish )[0] }
-                />
+                <MenuNavigator />
 
             </View>
         );
